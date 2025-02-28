@@ -1114,11 +1114,10 @@ dependencies = [
 
 [[package]]
 name = "miow"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "359f76430b20a79f9e20e115b3428614e654f04fab314482fc0fda0ebd3c6044"
+version = "0.7.0"
+source = "git+https://github.com/CharlesChen0823/miow.git?branch=bump_windows_sys_version#a88e82234e66114c5f5b2df33dcdd137d34eb74c"
 dependencies = [
- "windows-sys 0.48.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
