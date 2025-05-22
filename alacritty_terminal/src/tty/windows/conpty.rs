@@ -115,8 +115,8 @@ pub fn new(config: &Options, window_size: WindowSize) -> Result<Pty> {
     // size to be used. There may be small performance and memory advantages
     // to be gained by tuning this in the future, but it's likely a reasonable
     // start point.
-    let (conout, conout_pty_handle) = miow::pipe::anonymous(0)?;
-    let (conin_pty_handle, conin) = miow::pipe::anonymous(0)?;
+    let (conout, conout_pty_handle) = std::io::pipe()?;
+    let (conin_pty_handle, conin) = std::io::pipe()?;
 
     // Create the Pseudo Console, using the pipes.
     let result = unsafe {
