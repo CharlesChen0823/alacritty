@@ -1,5 +1,5 @@
 use std::ffi::OsStr;
-use std::io::{self, Result};
+use std::io::{self, PipeReader, PipeWriter, Result};
 use std::iter::once;
 use std::os::windows::ffi::OsStrExt;
 use std::sync::Arc;
@@ -15,14 +15,13 @@ mod conpty;
 
 use blocking::{UnblockedReader, UnblockedWriter};
 use conpty::Conpty as Backend;
-use miow::pipe::{AnonRead, AnonWrite};
 use polling::{Event, Poller};
 
 pub const PTY_CHILD_EVENT_TOKEN: usize = 1;
 pub const PTY_READ_WRITE_TOKEN: usize = 2;
 
-type ReadPipe = UnblockedReader<AnonRead>;
-type WritePipe = UnblockedWriter<AnonWrite>;
+type ReadPipe = UnblockedReader<PipeReader>;
+type WritePipe = UnblockedWriter<PipeWriter>;
 
 pub struct Pty {
     // XXX: Backend is required to be the first field, to ensure correct drop order. Dropping
